@@ -7,6 +7,9 @@ load_dotenv()
 # MongoDB connection with additional options
 MONGODB_URI = os.getenv("MONGODB_URI")
 
+if not MONGODB_URI or not MONGODB_URI.strip():
+    raise RuntimeError("MONGODB_URI environment variable is required")
+
 # Create client with connection options
 client = pymongo.MongoClient(
     MONGODB_URI,
