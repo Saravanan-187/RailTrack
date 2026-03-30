@@ -21,11 +21,11 @@
 
 ## Step 2: Configure Environment Variables
 
-Update the [.env](file:///c:/Users/Saravanan/Desktop/rail-vista-journey-main/backend/.env) file in the backend directory with your actual values:
+Update `backend/.env` with your actual values:
 
 ```env
-MONGODB_URI=mongodb+srv://your_username:your_password@cluster0.example.mongodb.net/rail_vista_journey?retryWrites=true&w=majority
-SECRET_KEY=your_strong_secret_key_here
+MONGODB_URI=mongodb+srv://<db_username>:<db_password>@cluster0.example.mongodb.net/rail_vista_journey?retryWrites=true&w=majority
+SECRET_KEY=<generate-a-long-random-secret>
 ALGORITHM=HS256
 ACCESS_TOKEN_EXPIRE_MINUTES=30
 ```

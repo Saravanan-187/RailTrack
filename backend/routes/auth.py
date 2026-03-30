@@ -3,7 +3,7 @@ from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from datetime import datetime, timedelta
 from models.user import UserCreate, UserLogin, UserResponse, Token
 from database.database import get_users_collection
-from utils.security import verify_password, get_password_hash, create_access_token
+from utils.security import verify_password, get_password_hash, create_access_token, get_secret_key
 from typing import Optional
 from bson import ObjectId
 
@@ -18,15 +18,9 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
     
     # Decode token to get user email
     from jose import JWTError, jwt
-    from dotenv import load_dotenv
-    import os
-    
-    load_dotenv()
-    SECRET_KEY = os.getenv("SECRET_KEY", "your-secret-key-here")
-    ALGORITHM = "HS256"
     
     try:
-        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        payload = jwt.decode(token, get_secret_key(), algorithms=["HS256"])
         email: Optional[str] = payload.get("sub")
         if email is None:
             raise HTTPException(

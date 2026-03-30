@@ -49,32 +49,26 @@ mongodb+srv://<username>:<password>@cluster0.example.mongodb.net/?retryWrites=tr
 
 ## Step 6: Update Your .env File
 
-Replace the placeholder values in your [.env](file:///c:/Users/Saravanan/Desktop/rail-vista-journey-main/backend/.env) file:
+Replace the placeholder values in `backend/.env`:
 
 ```env
 # Replace with your actual MongoDB connection string
-MONGODB_URI=mongodb+srv://railuser:your_password@your_cluster_name.random.mongodb.net/rail_vista_journey?retryWrites=true&w=majority
+MONGODB_URI=mongodb+srv://<db_username>:<db_password>@<cluster-host>/rail_vista_journey?retryWrites=true&w=majority
 
 # Create a strong secret key for JWT tokens
-SECRET_KEY=your_very_strong_secret_key_here_change_this
+SECRET_KEY=<generate-a-long-random-secret>
 
 ALGORITHM=HS256
 ACCESS_TOKEN_EXPIRE_MINUTES=30
 ```
 
-### Example Configuration:
+### Template Configuration:
 
-If your:
-- Username: `railuser`
-- Password: `securePassword123`
-- Cluster: `RailTrack`
-- Cluster URL: `railvistacluster.abcd1.mongodb.net`
-
-Your [.env](file:///c:/Users/Saravanan/Desktop/rail-vista-journey-main/backend/.env) file should look like:
+Your `backend/.env` file should look like:
 
 ```env
-MONGODB_URI=mongodb+srv://railuser:securePassword123@railvistacluster.abcd1.mongodb.net/rail_vista_journey?retryWrites=true&w=majority
-SECRET_KEY=my_very_secret_key_for_jwt_tokens_change_this
+MONGODB_URI=mongodb+srv://<db_username>:<db_password>@<cluster-host>/rail_vista_journey?retryWrites=true&w=majority
+SECRET_KEY=<generate-a-long-random-secret>
 ALGORITHM=HS256
 ACCESS_TOKEN_EXPIRE_MINUTES=30
 ```
@@ -109,7 +103,7 @@ python test_mongodb.py
 ## Security Best Practices
 
 1. **Never commit credentials to version control**
-   - The [.env](file:///c:/Users/Saravanan/Desktop/rail-vista-journey-main/backend/.env) file is in [.gitignore](file:///c:/Users/Saravanan/Desktop/rail-vista-journey-main/.gitignore) to prevent accidental commits
+   - The `backend/.env` file is in `.gitignore` to prevent accidental commits
 
 2. **Use strong passwords**
    - Generate complex passwords for your database users

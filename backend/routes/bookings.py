@@ -8,10 +8,7 @@ import random
 import string
 from datetime import datetime
 from jose import JWTError, jwt
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
+from utils.security import get_secret_key
 
 router = APIRouter()
 
@@ -22,12 +19,8 @@ from routes.auth import oauth2_scheme
 def get_current_user(token: str = Depends(oauth2_scheme)):
     users_collection = get_users_collection()
     
-    # JWT configuration
-    SECRET_KEY = os.getenv("SECRET_KEY", "your-secret-key-here")
-    ALGORITHM = "HS256"
-    
     try:
-        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        payload = jwt.decode(token, get_secret_key(), algorithms=["HS256"])
         email: Optional[str] = payload.get("sub")
         if email is None:
             raise HTTPException(
